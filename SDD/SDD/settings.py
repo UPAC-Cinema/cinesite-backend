@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'schedule.apps.ScheduleConfig',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -79,6 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'movies_database',
         'USER': 'postgres',
+        'PASSWORD': 'Deathshadow',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
