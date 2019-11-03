@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'sponsor.apps.SponsorConfig',
     'schedule.apps.ScheduleConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
