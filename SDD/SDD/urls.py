@@ -16,6 +16,12 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
+    path('bylaws/', include('bylaws.urls')),
+    path('faq/', include('faq.urls')),
+    path('feedback/', include('feedback.urls')),
+    path('home/', include('home.urls')),
+    path('officers/',include('officers.urls')),
+    path('policy/', include('policy.urls')),
     path('schedule/', include('schedule.urls')),
     path('sponsor/', include('sponsor.urls')),
 ]

@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bylaws.apps.BylawsConfig',
+    'faq.apps.FaqConfig',
+    'feedback.apps.FeedbackConfig',
+    'home.apps.HomeConfig',
+    'officers.apps.OfficersConfig',
+    'policy.apps.PolicyConfig',
     'sponsor.apps.SponsorConfig',
     'schedule.apps.ScheduleConfig',
     'django.contrib.auth',

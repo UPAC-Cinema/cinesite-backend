@@ -8,4 +8,3 @@ def index(request):
         # 'showings_list': showings_list,
     }
     return HttpResponse(template.render(context, request))
-    # return HttpResponse("Suck Me From The Back")

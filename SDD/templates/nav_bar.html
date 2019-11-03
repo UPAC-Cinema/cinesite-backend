@@ -4,14 +4,13 @@
     <a href="index.html" style ="float: left; width: 11%; height: 50%">
       <img src="{% static 'images/logo.png' %}" alt="my picture"/>
     </a>
-      <li class="border-left"><a href="index.html">Home</a></li>
+    <li class="border-left"><a href="{% url 'home:index' %}">Home</a></li>
     <li class="border-left"><a href="{% url 'schedule:index' %}">Schedule</a></li>
     <li class="border-left"><a href="{% url 'sponsor:index' %}">Sponsor a Movie</a></li>
-    <li class="border-left"><a href="faq.html">FAQ</a></li>
-    <li class="border-left"><a href="policies.html">Policies</a></li>
-    <li class="border-left"><a href="bylaws.html">Bylaws</a></li>
-    <li class="border-left"><a href="feedback.html">Feedback</a></li>
-    <!-- <li class="border-left"><a href="">{{ request.path }}</a></li> -->
+    <li class="border-left"><a href="{% url 'faq:index' %}">FAQ</a></li>
+    <li class="border-left"><a href="{% url 'policy:index' %}">Policies</a></li>
+    <li class="border-left"><a href="{% url 'bylaws:index' %}">Bylaws</a></li>
+    <li class="border-left"><a href="{% url 'feedback:index' %}">Feedback</a></li>
     <li class="border-left">
     	<b>
     		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Officer Login</button>
