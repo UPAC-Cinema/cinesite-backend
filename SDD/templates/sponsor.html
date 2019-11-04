@@ -38,81 +38,89 @@
                 <div class="header-inner container">SPONSORSHIP FORM</div>
             </header>
             <redtitle>Please fill out the fields below</redtitle>
-            <form >
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="{% url 'sponsor:results' %}" method="post">
+                {% csrf_token %}
                 <div class = "form-group row margin_form" style="margin-top: 2%">
                     <label for="orgName" class = "col-sm-3 col-form-label">* Organization name</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="orgName">
+                        <input type="text" name="orgName" class="form-control" id="orgName">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="contactName" class = "col-sm-3 col-form-label">* Contact Name</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="contactName">
+                        <input type="text" name="contactName" class="form-control" id="contactName">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="contactEmail" class = "col-sm-3 col-form-label">* Contact Email</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="contactEmail">
+                        <input type="text" name="contactEmail" class="form-control" id="contactEmail">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <div class = col-sm-3>* Union Funded</div>
                     <div class="form-check form-check-inline margin_form">
-                      <input class="form-check-input" type="radio" id="unionYes" value="unionYes">
+                      <input class="form-check-input" name="unionYes" type="radio" id="unionYes" value="unionYes">
                       <label class="form-check-label" for="unionYes">Yes</label>
                     </div>
                     <div class="form-check form-check-inline margin_form">
-                      <input class="form-check-input" type="radio" id="unionYes" value="unionNo">
+                      <input class="form-check-input" name="unionNo" type="radio" id="unionNo" value="unionNo">
                       <label class="form-check-label" for="unionNo">No</label>
                     </div>
                 </div>
                 <div class = "form-group row margin_form"style="margin-top: 2%">
                     <div class = col-sm-3>* Payment Option</div>
                     <div class="form-check form-check-inline margin_form">
-                      <input class="form-check-input" type="radio" id="fiftyCheck" value="fiftyCheck">
+                      <input class="form-check-input" name="fiftyCheck" type="radio" id="fiftyCheck" value="fiftyCheck">
                       <label class="form-check-label" for="fityCheck">50/50 Option</label>
                     </div>
                     <div class="form-check form-check-inline margin_form">
-                      <input class="form-check-input" type="radio" id="fullCheck" value="fullCheck">
+                      <input class="form-check-input" name="fullCheck" type="radio" id="fullCheck" value="fullCheck">
                       <label class="form-check-label" for="fullCheck">Full Payment</label>
                     </div>
                 </div>
                 <div class = "form-group row margin_form"style="margin-top: 2%">
                     <label for="desiredDate" class = "col-sm-3 col-form-label">* Desired Date</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="desiredDate">
+                        <input type="text" name="desiredDate" class="form-control" id="desiredDate">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="year" class = "col-sm-3 col-form-label">* Year</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="year">
+                        <input type="text" name="year" class="form-control" id="year">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="firstChoice" class = "col-sm-3 col-form-label">* First Movie Choice</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="firstChoice">
+                        <input type="text" name="firstChoice" class="form-control" id="firstChoice">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="secondChoice" class = "col-sm-3 col-form-label">Second Movie Choice</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="secondChoice">
+                        <input type="text" name="secondChoice" class="form-control" id="secondChoice">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="thirdChoice" class = "col-sm-3 col-form-label">Third Movie Choice</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="thirdChoice">
+                        <input type="text" name="thirdChoice" class="form-control" id="thirdChoice">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="forthChoice" class = "col-sm-3 col-form-label">Fourth Movie Choice</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="forthChoice">
+                        <input type="text" name="fourthChoice" class="form-control" id="fourthChoice">
                     </div>
                 </div>
                 <div class="form-group row margin_form">

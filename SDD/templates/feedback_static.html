@@ -61,32 +61,24 @@
                 <div class="header-inner container">ANONYMOUS FEEDBACK</div>
             </header>
             <div class = "row" style="margin-left:3%; padding-top: 1%">Got something to say? Let us know!</div>
-            <div class = "row" style="margin-left:3%">If you want us to respond, make sure to enter your name and email!</div>
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-            <form action="{% url 'feedback:results' %}" method="post">
+            <div class = "row" style="margin-left:3%; margin-bottom: 2%">If you want us to respond, make sure to enter your name and email!</div>
+            <form method="post">
                 {% csrf_token %}
-                <div class = "form-group row margin_form" style ="padding-top: 2%">
+                <div class = "form-group row margin_form">
                     <label for="optionalName" class = "col-sm-2 col-form-label">Name (optional):</label>
                     <div class = "col-sm-4">
-                        <input type="text" name="name" class="form-control" id="optionalName">
+                        <input type="text" class="form-control" id="optionalName">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="optionalEmail" class = "col-sm-2 col-form-label">Email (optional):</label>
                     <div class = "col-sm-4">
-                        <input type="text" name="email" class="form-control" id="optionalEmail">
+                        <input type="text" class="form-control" id="optionalEmail">
                     </div>
                 </div>
                 <div class="form-group" style="margin-left: 3%">
                     <label for="feedbackArea">Comments</label>
-                    <textarea class="form-control" name="returned_text" id="feedbackArea" rows="6"></textarea>
+                    <textarea class="form-control" id="feedbackArea" rows="6"></textarea>
                 </div>
                 <div class="form-group row margin_form" style="padding-bottom: 1%">
                     <div class="col">
