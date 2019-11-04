@@ -19,5 +19,5 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('contact/', include('contact.urls')),
     path('backend/',include('backend.urls')),
-    path('schedule/', include('schedule.urls')),
+    path('', include('schedule.urls')),
 ]

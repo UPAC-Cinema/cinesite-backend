@@ -31,7 +31,7 @@
                 <tbody>
                 {% for showing in showings_list %}
                   <tr>
-                    <td>{{ showing.movie_name }}</td>
+                    <td>{{ showing.movie.title }}</td>
                     <td>{{ showing.date }}</td>
                     {% if showing.attendance == -1 %}
                       <td>N/A</td

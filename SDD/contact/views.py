@@ -24,7 +24,7 @@ def feedback_results(request):
             'returned_text': request.POST.get('returned_text')
         }
         sendemail_feedback(passed_dict)
-        return HttpResponseRedirect('/schedule')
+        return HttpResponseRedirect('/')
 
 def sponsor(request):
     template = loader.get_template('sponsor.html')
@@ -89,7 +89,7 @@ def sponsor_results(request):
             passed_dict['payment'] = 'Full payment'
 
         sendemail_sponsor(passed_dict)
-        return HttpResponseRedirect('/schedule')
+        return HttpResponseRedirect('/')
 
 
 

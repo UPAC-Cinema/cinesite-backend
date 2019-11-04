@@ -12,7 +12,6 @@
   	<body>
 
         <!--Nav Bar: do not remove-->
-        <nav id="nav-loader"></nav>
         {% include "nav_bar.html" %}
 
         <div class="row" style="padding-top:50px; padding-bottom:50px;">
@@ -20,11 +19,11 @@
                 <div class="panel">
                     <div class="row">
                         <div class="col-md-3">
-                            <img class="big-poster" src="{% static 'images/NightComesForUs.png' %}">
+                            <img class="big-poster" src="{{ upcoming_showing1.movie.poster_url }}">
                         </div>
                         <div class="col-md-8" style="padding-left:60px;">
                             <div class="panel panel-heading" style="padding-bottom:10px; padding-top:10px;">
-                                Friday, 1/1 - 7PM, 9:30PM, 12AM
+                                {{ upcoming_showing1.date }} - {{ upcoming_showing1.time }}
                             </div>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
@@ -32,7 +31,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12" style="padding-bottom:10px; padding-top:10px;">
-                        Ito, a gangland enforcer, is caught amidst a treacherous and violent insurrection within his Triad crime family.
+                        {{ upcoming_showing1.movie.plot }}
                     </div>
                 </div>
             </div>
@@ -41,11 +40,11 @@
                 <div class="panel">
                     <div class="row">
                         <div class="col-md-3">
-                            <img class="big-poster" src="{% static 'images/ONEPIECE.png' %}">
+                            <img class="big-poster" src="{{ upcoming_showing2.movie.poster_url }}">
                         </div>
                         <div class="col-md-8" style="padding-left:60px;">
                             <div class="panel panel-heading" style="padding-bottom:10px; padding-top:10px;">
-                                Saturday, 1/2 - 7PM, 9:30PM, 12AM
+                                {{ upcoming_showing2.date }} - {{ upcoming_showing2.time }}
                             </div>
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/S8_YwFLCh4U"></iframe>
@@ -53,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12" style="padding-bottom:10px;">
-                        The world's boldest buccaneers set sail for the great Pirate Festival, where the Straw Hats join a mad-dash race to find Gol D.Roger's treasure. There's just one little problem. An old member of Roger's crew has a sinister score to settle. All bets are off when the most iconic pirates of One Piece history band together for a swashbuckling showdown, the likes of which have never been seen!
+                        {{ upcoming_showing2.movie.plot }}
                     </div>
                 </div>
             </div>
@@ -61,15 +60,17 @@
 
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <div class="carousel-img"><img class="poster" src="{% static 'images/NightComesForUs.png' %}"></div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel-img"><img class="poster" src="{% static 'images/scorpion_king.png' %}"></div>
-                </div>
-                <div class="carousel-item">
-                    <div class="carousel-img"><img class="poster" src="{% static 'images/ONEPIECE.png' %}"></div>
-                </div>
+                {% for showing in showings_list %}
+                    {% if showing == upcoming_showing1 %}
+                        <div class="carousel-item active">
+                            <div class="carousel-img"><img class="poster" src="{{ showing.movie.poster_url }}"></div>
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <div class="carousel-img"><img class="poster" src="{{ showing.movie.poster_url }}"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
 
@@ -81,11 +82,14 @@
             }
             next.children(':first-child').clone().appendTo($(this));
 
-            if (next.next().length>0) {
-                next.next().children(':first-child').clone().appendTo($(this));
-            }
-            else {
-                $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+            var count = document.getElementById("carousel").getElementsByClassName("carousel-item").length;
+            if (count > 9) { count = 9; }
+            for (var i=0;i<count;i++) {
+                next=next.next();
+                if (!next.length) {
+                    next=$(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo($(this));
             }
         });
         </script>

@@ -39,12 +39,13 @@ li a {
     background-color: #ECCD34;
     padding-top: 10px;
     padding-bottom: 10px;
+    max-height: 200px;
 }
 
 .carousel-img {
     padding-left: 10px;
     padding-right: 10px;
-    display: inline;
+    display: inline !important;
 }
 
 .carousel-inner .carousel-item-right.active,
