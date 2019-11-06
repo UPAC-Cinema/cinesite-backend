@@ -83,8 +83,8 @@
             next.children(':first-child').clone().appendTo($(this));
 
             var count = document.getElementById("carousel").getElementsByClassName("carousel-item").length;
-            if (count > 9) { count = 9; }
-            for (var i=0;i<count;i++) {
+            if (count > 11) { count = 11; }
+            for (var i=0;i<count - 2;i++) {
                 next=next.next();
                 if (!next.length) {
                     next=$(this).siblings(':first');

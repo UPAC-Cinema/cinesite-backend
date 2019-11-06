@@ -19,31 +19,32 @@
             <header class = header>
                 <div class="header-inner container">UPDATE SCHEDULE</div>
             </header>
-            <form>
+            <form action="{% url 'backend:update_sched' %}" method='post'>
+                {% csrf_token %}
                 <div class = "form-group row margin_form" style="margin-top: 2%">
                     <label for="title" class = "col-sm-3 col-form-label">Title</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="title">
+                        <input type="text" name="title" class="form-control" id="title">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="year" class = "col-sm-3 col-form-label">Year</label>
                     <div class = "col-sm-4">
-                        <input type="text" class="form-control" id="year">
+                        <input type="text" name="year" class="form-control" id="year">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="showdate" class = "col-sm-3 col-form-label">Showdate</label>
                     <div class = "col-sm-4">
-                        <input type="date" class="form-control" id="showdate">
+                        <input type="date" name="showdate" class="form-control" id="showdate">
                     </div>
                 </div>
                 <div class = "form-group row margin_form">
                     <label for="showtimes" class = "col-sm-3 col-form-label">Showtimes</label>
                     <div class = "col-sm-4">
-                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM,9:30PM,12:00AM">  Regular Showtimes (7PM, 9:30PM, 12AM)<br>
-                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM,10:00PM,1:00AM">  Extended Showtimes (7PM, 10PM, 1AM)<br>
-                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM,11:00PM">  Super Extended Showtimes (7PM, 11PM)<br>
+                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM, 9:30PM, 12:00AM">  Regular Showtimes (7PM, 9:30PM, 12AM)<br>
+                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM, 10:00PM, 1:00AM">  Extended Showtimes (7PM, 10PM, 1AM)<br>
+                        <input type="radio" name="showtimes" id="showtimes" value="7:00PM, 11:00PM">  Super Extended Showtimes (7PM, 11PM)<br>
                     </div>
                 </div>
                 <div class="form-group row margin_form" style="padding-bottom:1%;">

@@ -19,7 +19,7 @@ class Movie(models.Model):
 class Showings(models.Model):
     showing_pkey = models.AutoField(primary_key=True)
     date = models.DateField('last time seen')
-    time = models.TimeField('time shown')
+    time = models.CharField(max_length=204, blank=True, null=True)
     attendance = models.IntegerField()
     showing_id = models.IntegerField()
 
