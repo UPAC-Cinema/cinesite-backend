@@ -36,6 +36,12 @@ li a {
   font-weight: bolder;
 }
 
+paneltitle{
+  font-weight: bold;
+  color: #B91D28;
+  font-size: 32px;
+}
+
 
 .footer {
     position: fixed;
