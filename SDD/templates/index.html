@@ -95,27 +95,13 @@
                         <img src="{{ upcoming_showing1.movie.poster_url }}">
                     </div>
                     <div class = "col-md-auto">
-                        <paneltitle>
-                            {{ upcoming_showing1.movie.title }}
-                        </paneltitle>
-                        <div>
-                            {{ upcoming_showing2.date }} - {{ upcoming_showing2.time }}
-                        </div>
-                        <div>
-                            <br>Year: {{ upcoming_showing1.movie.year }}
-                        </div>
-                        <div>
-                            Rating: {{ upcoming_showing1.movie.mpaa_rating }}
-                        </div>
-                        <div>
-                            Director(s): {{ upcoming_showing1.movie.directors }}
-                        </div>
-                        <div>
-                            Rotten Tomatoes Rating: {{ upcoming_showing1.movie.rotten_tomatoes_rating }} 
-                        </div>
-                        <div>
-                            <br>{{ upcoming_showing1.movie.plot }}
-                        </div>
+                        <paneltitle>{{ upcoming_showing1.movie.title }}</paneltitle>
+                        <div>{{ upcoming_showing1.date }} - {{ upcoming_showing1.time }}</div>
+                        <div><br>Year: {{ upcoming_showing1.movie.year }}</div>
+                        <div>Rating: {{ upcoming_showing1.movie.mpaa_rating }}</div>
+                        <div>Director(s): {{ upcoming_showing1.movie.directors }}</div>
+                        <div>Rotten Tomatoes Rating: {{ upcoming_showing1.movie.rotten_tomatoes_rating }} </div>
+                        <div><br>{{ upcoming_showing1.movie.plot }}</div>
                     </div>
                 </div>
               </div>
