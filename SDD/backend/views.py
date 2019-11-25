@@ -6,6 +6,56 @@ from schedule.models import Showings
 from schedule.models import Movie
 import omdb
 import json
+import sys
+
+from os.path import expanduser, join
+from os import makedirs
+
+def appdata():
+    path = "cinesite"
+
+    if sys.platform.startswith("linux"):
+        path = join(expanduser("~"), ".local/share/cinesite")
+    elif sys.platform == "win32":
+        path = join(os.getenv('APPDATA'), "cinesite")
+
+    makedirs(path, exist_ok=True)
+    return path
+
+def write_to_disk(f, name):
+    with open(join(appdata(), name), 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+def bylaws(request):
+    if request.method == 'POST':
+        write_to_disk(request.FILES['bylaws'], "bylaws.pdf")
+        return HttpResponseRedirect('/backend')
+    else:
+        bylaws_file = open(join(appdata(), 'bylaws.pdf'), 'rb')
+        response = HttpResponse(content=bylaws_file)
+        response['Content-Type'] = 'application/pdf'
+        return response
+
+def policies(request):
+    if request.method == 'POST':
+        write_to_disk(request.FILES['policies'], "policies.pdf")
+        return HttpResponseRedirect('/backend')
+    else:
+        policies_file = open(join(appdata(), 'policies.pdf'), 'rb')
+        response = HttpResponse(content=policies_file)
+        response['Content-Type'] = 'application/pdf'
+        return response
+
+def faqs(request):
+    if request.method == 'POST':
+        write_to_disk(request.FILES['faqs'], "faqs.pdf")
+        return HttpResponseRedirect('/backend')
+    else:
+        faqs_file = open(join(appdata(), 'faqs.pdf'), 'rb')
+        response = HttpResponse(content=faqs_file)
+        response['Content-Type'] = 'application/pdf'
+        return response
 
 def delete(request):
     Showings.objects.filter(showing_pkey=request.GET['id']).delete()

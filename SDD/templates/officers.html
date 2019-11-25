@@ -58,25 +58,56 @@
 
         <div class="container margin_spaced">
             <header class="header">
-                <div class="header-inner container">UPDATE BYLAWS, POLICIES, AND FAQ</div>
+                <div class="header-inner container">UPDATE BYLAWS</div>
             </header>
-            <form>
+            <form action="{% url 'backend:bylaws' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
                 <div class = "form-group row margin_form" style="margin-top:2%;">
                     <label for="bylaws" class = "col-sm-3 col-form-label">Bylaws</label>
                     <div class = "col-sm-4">
-                        <input type="file" id="bylaws" accept=".pdf">
+                        <input type="file" name="bylaws" id="bylaws" accept=".pdf">
                     </div>
                 </div>
+                <div class="form-group row margin_form" style="padding-bottom:1%;">
+                    <div class="col">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-primary">Clear Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container margin_spaced">
+            <header class="header">
+                <div class="header-inner container">UPDATE POLICIES</div>
+            </header>
+            <form action="{% url 'backend:policies' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
                 <div class = "form-group row margin_form" style="margin-top:2%;">
-                    <label for="policies" class = "col-sm-3 col-form-label">Policies</label>
+                    <label for="bylaws" class = "col-sm-3 col-form-label">Policies</label>
                     <div class = "col-sm-4">
-                        <input type="file" id="policies" accept=".pdf">
+                        <input type="file" name="policies" id="policies" accept=".pdf">
                     </div>
                 </div>
-                <div class="form-group row margin_form">
-                    <label for="faq" class="col-sm-3 col-form-label">FAQ</label>
-                    <div class="col-sm-4">
-                        <input type="file" id="faq" accept=".pdf">
+                <div class="form-group row margin_form" style="padding-bottom:1%;">
+                    <div class="col">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-primary">Clear Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container margin_spaced">
+            <header class="header">
+                <div class="header-inner container">UPDATE FAQs</div>
+            </header>
+            <form action="{% url 'backend:faqs' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+                <div class = "form-group row margin_form" style="margin-top:2%;">
+                    <label for="bylaws" class = "col-sm-3 col-form-label">FAQs</label>
+                    <div class = "col-sm-4">
+                        <input type="file" name="faqs" id="faqs" accept=".pdf">
                     </div>
                 </div>
                 <div class="form-group row margin_form" style="padding-bottom:1%;">
