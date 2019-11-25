@@ -235,3 +235,9 @@ textarea{
   border-color: #B91D28;
   box-shadow: none !important;
 }
+
+.modal-dialog-md{
+    width: 85%;
+    padding-top: 5%;
+    margin: 0 auto;
+}
