@@ -239,7 +239,6 @@ textarea{
 /*Wider Movie information modal*/
 .modal-dialog-md{
     width: 85%;
-    position: fixed;
-    top: 5%;
-    left: 7%;
+    padding-top: 5%;
+    margin: 0 auto;
 }
