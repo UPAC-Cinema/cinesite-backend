@@ -155,5 +155,33 @@
     	<!-- JS Stuff bootstrap says to include -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		movie_1_title = "{{ upcoming_showing1.movie.title }}";
+		movie_2_title = "{{ upcoming_showing2.movie.title }}";
+
+		movie_1_year = {{ upcoming_showing1.movie.year }};
+		movie_2_year = {{ upcoming_showing2.movie.year }};
+
+		function link_to_embed(url) {
+			return url.replace("/watch?v=", "/embed/");
+		}
+
+		function set_movie_1_url(url) {
+			url = link_to_embed(url);
+			console.log("1: " + url);
+			$('#showing_1_trailer').attr('src', url);
+		}
+
+		function set_movie_2_url(url) {
+			url = link_to_embed(url);
+			console.log("2: " + url);
+			$('#showing_2_trailer').attr('src', url);
+		}
+
+		movieTrailer(movie_1_title, movie_1_year).then(set_movie_1_url).catch(console.error)
+		movieTrailer(movie_2_title, movie_2_year).then(set_movie_2_url).catch(console.error)
+	</script>
+
   	</body>
 </html>
