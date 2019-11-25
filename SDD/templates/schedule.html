@@ -25,19 +25,28 @@
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Year</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Attendance</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for showing in showings_list %}
                   <tr>
                     <td>{{ showing.movie.title }}</td>
+                    <td>{{ showing.movie.year }}</td>
                     <td>{{ showing.date }}</td>
                     {% if showing.attendance == -1 %}
-                      <td>N/A</td
+                        <td>N/A</td>
                     {% else %}
-                      <td>{{ showing.attendance }}</td>
+                        <td>{{ showing.attendance }}</td>
                     {% endif %}
+
+                    <td><a href="{% url 'backend:edit'%}?id={{ showing.showing_pkey }}">Edit</a>&nbsp;
+                        {% if showings_list|length > 2 %}
+                        <a href="{% url 'backend:delete' %}?id={{ showing.showing_pkey }}">Delete</a>
+                        {% endif %}
+                    </td>
                   </tr>
                 {% endfor%}
                 </tbody>

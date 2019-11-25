@@ -7,6 +7,7 @@
     	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/movie-trailer"></script>
         <title>UPAC Cinema</title>
   	</head>
   	<body>
@@ -26,7 +27,7 @@
                                 {{ upcoming_showing1.movie.title }}
                             </paneltitle>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
+                                <iframe id="showing_1_trailer" class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
                             </div>
                             <div style="padding-bottom:10px; padding-top:10px; text-align: center;">
                                 {{ upcoming_showing1.date }} - {{ upcoming_showing1.time }}
@@ -50,7 +51,7 @@
                                 {{ upcoming_showing2.movie.title }}
                             </paneltitle>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
+                                <iframe id="showing_2_trailer" class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
                             </div>
                             <div style="padding-bottom:10px; padding-top:10px; text-align: center;">
                                 {{ upcoming_showing2.date }} - {{ upcoming_showing2.time }}
@@ -67,7 +68,7 @@
         <div id="carousel" class="carousel slide" data-ride="carousel" style = "margin-bottom: 1%">
             <div class="carousel-inner" role="listbox">
                 {% for showing in showings_list %}
-                    {% if showing == upcoming_showing1 %}
+                    {% if showing == upcoming_showing1 %} <!-- Handle showing 2 here as well? -->
                         <div class="carousel-item active">
                             <div class="carousel-img"><img class="poster" src="{{ showing.movie.poster_url }}"></div>
                         </div>
@@ -146,7 +147,6 @@
             }
         });
         </script>
-
 
         <!--Footer: do not remove-->
         <div id="footer-loader"></div>

@@ -7,6 +7,30 @@ from schedule.models import Movie
 import omdb
 import json
 
+def delete(request):
+    Showings.objects.filter(showing_pkey=request.GET['id']).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def edit(request):
+    if request.method == 'POST':
+        showing_pkey = request.POST['id']
+        attendance = request.POST['attendance']
+
+        showing = Showings.objects.get(showing_pkey=showing_pkey)
+        showing.attendance = attendance
+        showing.save()
+
+        return HttpResponseRedirect('/past_showings/')
+    else:
+        showing_pkey = request.GET['id']
+        showing = Showings.objects.get(showing_pkey=showing_pkey)
+        template = loader.get_template('edit_showing.html')
+        context = {
+            'showing': showing,
+            'id': showing_pkey
+        }
+        return HttpResponse(template.render(context, request))
+
 def officers(request):
     template = loader.get_template('officers.html')
     context = {
