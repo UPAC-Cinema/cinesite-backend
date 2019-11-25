@@ -63,11 +63,9 @@
             <div class = "row" style="margin-left:3%; padding-top: 1%">Got something to say? Let us know!</div>
             <div class = "row" style="margin-left:3%">If you want us to respond, make sure to enter your name and email!</div>
             {% if messages %}
-            <ul class="messages">
                 {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
                 {% endfor %}
-            </ul>
             {% endif %}
 
             <form action="{% url 'contact:feedback_results' %}" method="post">

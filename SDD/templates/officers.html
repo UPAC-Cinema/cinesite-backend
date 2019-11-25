@@ -19,6 +19,11 @@
             <header class = header>
                 <div class="header-inner container">UPDATE SCHEDULE</div>
             </header>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <form action="{% url 'backend:update_sched' %}" method='post'>
                 {% csrf_token %}
                 <div class = "form-group row margin_form" style="margin-top: 2%">
