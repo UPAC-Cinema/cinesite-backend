@@ -1,0 +1,171 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  	<head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/movie-trailer"></script>
+        <title>UPAC Cinema</title>
+  	</head>
+  	<body>
+
+        <!--Nav Bar: do not remove-->
+        {% include "nav_bar.html" %}
+
+        <div class="row" style="padding-top: 1%; padding-bottom:1%;">
+            <div class="col-lg-6" style="padding-bottom:10px;">
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="big-poster"  src="{{ upcoming_showing1.movie.poster_url }}">
+                        </div>
+                        <div class="col-md-8" style="padding-left:60px;padding-bottom:10px;">
+                            <paneltitle>
+                                {{ upcoming_showing1.movie.title }}
+                            </paneltitle>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe id="showing_1_trailer" class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
+                            </div>
+                            <div style="padding-bottom:10px; padding-top:10px; text-align: center;">
+                                {{ upcoming_showing1.date }} - {{ upcoming_showing1.time }}
+                            </div>
+                            <b>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poster{{ upcoming_showing1.showing_id }}Modal" style="display: block; margin: 0 auto;">More Info</button>
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 ">
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="big-poster"  src="{{ upcoming_showing2.movie.poster_url }}">
+                        </div>
+                        <div class="col-md-8" style="padding-left:60px;padding-bottom:10px;">
+                            <paneltitle>
+                                {{ upcoming_showing2.movie.title }}
+                            </paneltitle>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe id="showing_2_trailer" class="embed-responsive-item" src="https://www.youtube.com/embed/HfSisHrUTLM"></iframe>
+                            </div>
+                            <div style="padding-bottom:10px; padding-top:10px; text-align: center;">
+                                {{ upcoming_showing2.date }} - {{ upcoming_showing2.time }}
+                            </div>
+                            <b>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#poster{{ upcoming_showing2.showing_id }}Modal" style="display: block; margin: 0 auto;">More Info</button>
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="carousel" class="carousel slide" data-ride="carousel" style = "margin-bottom: 1%">
+            <div class="carousel-inner" role="listbox">
+                {% for showing in showings_list %}
+                    {% if showing == upcoming_showing1 %} <!-- Handle showing 2 here as well? -->
+                        <div class="carousel-item active">
+                            <div class="carousel-img" data-toggle="modal" data-target="#poster{{ showing.showing_id }}Modal"><img class="poster" src="{{ showing.movie.poster_url }}"></div>
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <div class="carousel-img" data-toggle="modal" data-target="#poster{{ showing.showing_id }}Modal"><img class="poster" src="{{ showing.movie.poster_url }}"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    {% for showing in showings_list %}
+        <div class="modal fade-md" id="poster{{ showing.showing_id }}Modal" tabindex="-1" role="dialog" aria-labelledby="poster{{ showing.showing_id }}ModallLabel" aria-hidden="true">
+          <div class="modal-dialog-md" role="document">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color: #ECCD34;">
+                <h5 class="modal-title" style="font-weight: bold" id="poster{{ showing.showing_id }}ModalLabel">{{ showing.movie.title }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class ="row">
+                    <div class = "col-md-auto">
+                        <img src="{{ showing.movie.poster_url }}">
+                    </div>
+                    <div class = "col">
+                        <paneltitle>{{ showing.movie.title }}</paneltitle>
+                        <div>{{ showing.date }} - {{ showing.time }}</div>
+                        <div><br>Year: {{ showing.movie.year }}</div>
+                        <div>Rating: {{ showing.movie.mpaa_rating }}</div>
+                        <div>Director(s): {{ showing.movie.directors }}</div>
+                        <div>Rotten Tomatoes Rating: {{ showing.movie.rotten_tomatoes_rating }} </div>
+                        <div><br>{{ showing.movie.plot }}</div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+
+        <script>
+        $('.carousel .carousel-item').each(function(){
+            var next = $(this).next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+
+            var count = document.getElementById("carousel").getElementsByClassName("carousel-item").length;
+            if (count > 11) { count = 11; }
+            for (var i=0;i<count - 2;i++) {
+                next=next.next();
+                if (!next.length) {
+                    next=$(this).siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo($(this));
+            }
+        });
+        </script>
+
+        <!--Footer: do not remove-->
+        <div id="footer-loader"></div>
+        {% include "footer.html" %}
+
+    	<!-- JS Stuff bootstrap says to include -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		movie_1_title = "{{ upcoming_showing1.movie.title }}";
+		movie_2_title = "{{ upcoming_showing2.movie.title }}";
+
+		movie_1_year = {{ upcoming_showing1.movie.year }};
+		movie_2_year = {{ upcoming_showing2.movie.year }};
+
+		function link_to_embed(url) {
+			return url.replace("/watch?v=", "/embed/");
+		}
+
+		function set_movie_1_url(url) {
+			url = link_to_embed(url);
+			console.log("1: " + url);
+			$('#showing_1_trailer').attr('src', url);
+		}
+
+		function set_movie_2_url(url) {
+			url = link_to_embed(url);
+			console.log("2: " + url);
+			$('#showing_2_trailer').attr('src', url);
+		}
+
+		movieTrailer(movie_1_title, movie_1_year).then(set_movie_1_url).catch(console.error)
+		movieTrailer(movie_2_title, movie_2_year).then(set_movie_2_url).catch(console.error)
+	</script>
+
+  	</body>
+</html>
