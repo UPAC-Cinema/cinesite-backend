@@ -97,10 +97,10 @@ def sponsor_results(request):
         messages.info(request,
             'You did not fill in all required sections (marked by *)')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    '''
+        '''
         If all fields filled out correctly, then make a dictionary of data then
         pass it to sendemail_sponsor to send an email to the club.
-    '''
+        '''
     else:
         passed_dict = {
             'orgName': request.POST.get('orgName'),
