@@ -72,6 +72,9 @@ def policies(request):
 '''
 def faqs(request):
     if request.method == 'POST':
+        if not request.FILES:
+            messages.info(request, 'Please upload a PDF file', extra_tags='faqs')
+            return HttpResponseRedirect('/backend')
         file_extension = request.FILES['faqs'].name.split('.')
         if file_extension[1] == 'pdf':
             write_to_disk(request.FILES['faqs'], "faqs.pdf")
