@@ -37,12 +37,16 @@ def write_to_disk(f, name):
 '''
 def bylaws(request):
     if request.method == 'POST':
+        if not request.FILES:
+            messages.info(request, 'Please upload a PDF file', extra_tags='bylaws')
+            return HttpResponseRedirect('/backend')
+
         file_extension = request.FILES['bylaws'].name.split('.')
-        print(file_extension[1])
         if file_extension[1] == 'pdf':
             write_to_disk(request.FILES['bylaws'], "bylaws.pdf")
         else:
             messages.info(request, 'Please upload a PDF file', extra_tags='bylaws')
+
         return HttpResponseRedirect('/backend')
     else:
         bylaws_file = open(join(appdata(), 'bylaws.pdf'), 'rb')
@@ -55,11 +59,16 @@ def bylaws(request):
 '''
 def policies(request):
     if request.method == 'POST':
+        if not request.FILES:
+            messages.info(request, 'Please upload a PDF file', extra_tags='policies')
+            return HttpResponseRedirect('/backend')
+
         file_extension = request.FILES['policies'].name.split('.')
         if file_extension[1] == 'pdf':
             write_to_disk(request.FILES['policies'], "policies.pdf")
         else:
             messages.info(request, 'Please upload a PDF file', extra_tags='policies')
+
         return HttpResponseRedirect('/backend')
     else:
         policies_file = open(join(appdata(), 'policies.pdf'), 'rb')
@@ -75,11 +84,13 @@ def faqs(request):
         if not request.FILES:
             messages.info(request, 'Please upload a PDF file', extra_tags='faqs')
             return HttpResponseRedirect('/backend')
+
         file_extension = request.FILES['faqs'].name.split('.')
         if file_extension[1] == 'pdf':
             write_to_disk(request.FILES['faqs'], "faqs.pdf")
         else:
             messages.info(request, 'Please upload a PDF file', extra_tags='faqs')
+
         return HttpResponseRedirect('/backend')
     else:
         faqs_file = open(join(appdata(), 'faqs.pdf'), 'rb')

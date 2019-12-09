@@ -24,8 +24,16 @@ def index(request):
     elif len(showings_list) == 1:
         ... # This is a bug!
 
-    upcoming_showing1 = showings_list[0]
-    upcoming_showing2 = showings_list[1]
+    if len(showings_list) >= 1:
+        upcoming_showing1 = showings_list[0]
+    else:
+        upcoming_showing1 = None
+
+    if len(showings_list) >= 2:
+        upcoming_showing2 = showings_list[1]
+    else:
+        upcoming_showing2 = None
+
     template = loader.get_template('index.html')
 
 
@@ -39,8 +47,8 @@ def index(request):
         carousel.
     '''
     context = {
-        'upcoming_showing1': showings_list[0],
-        'upcoming_showing2': showings_list[1],
+        'upcoming_showing1': upcoming_showing1,
+        'upcoming_showing2': upcoming_showing2,
         'showings_list': showings_list,
     }
     return HttpResponse(template.render(context, request))
