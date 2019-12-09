@@ -37,7 +37,12 @@ def write_to_disk(f, name):
 '''
 def bylaws(request):
     if request.method == 'POST':
-        write_to_disk(request.FILES['bylaws'], "bylaws.pdf")
+        file_extension = request.FILES['bylaws'].name.split('.')
+        print(file_extension[1])
+        if file_extension[1] == 'pdf':
+            write_to_disk(request.FILES['bylaws'], "bylaws.pdf")
+        else:
+            messages.info(request, 'Please upload a PDF file', extra_tags='bylaws')
         return HttpResponseRedirect('/backend')
     else:
         bylaws_file = open(join(appdata(), 'bylaws.pdf'), 'rb')
@@ -50,7 +55,11 @@ def bylaws(request):
 '''
 def policies(request):
     if request.method == 'POST':
-        write_to_disk(request.FILES['policies'], "policies.pdf")
+        file_extension = request.FILES['policies'].name.split('.')
+        if file_extension[1] == 'pdf':
+            write_to_disk(request.FILES['policies'], "policies.pdf")
+        else:
+            messages.info(request, 'Please upload a PDF file', extra_tags='policies')
         return HttpResponseRedirect('/backend')
     else:
         policies_file = open(join(appdata(), 'policies.pdf'), 'rb')
@@ -63,7 +72,11 @@ def policies(request):
 '''
 def faqs(request):
     if request.method == 'POST':
-        write_to_disk(request.FILES['faqs'], "faqs.pdf")
+        file_extension = request.FILES['faqs'].name.split('.')
+        if file_extension[1] == 'pdf':
+            write_to_disk(request.FILES['faqs'], "faqs.pdf")
+        else:
+            messages.info(request, 'Please upload a PDF file', extra_tags='faqs')
         return HttpResponseRedirect('/backend')
     else:
         faqs_file = open(join(appdata(), 'faqs.pdf'), 'rb')
@@ -121,7 +134,7 @@ def officers(request):
 def update_sched(request):
     ''' Error checking for if user doesnt put all fields in '''
     if (request.POST.get('title') == '' or request.POST.get('year') == '' or request.POST.get('showdate') == '' or request.POST.get('showtimes') == ''):
-        messages.info(request, "You're missing some fields!")
+        messages.info(request, "You're missing some fields!", extra_tags='sched')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         movie_title = request.POST.get('title')
@@ -134,7 +147,7 @@ def update_sched(request):
             r = omdb.request(t=movie_title, y=movie_year, plot='short', r='json', apikey='7e685318')
             result = json.loads(r.content)
             if result['Response'] == 'False':
-                messages.info(request, "Movie not found in database...")
+                messages.info(request, "Movie not found in database...", extra_tags='sched')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             score = '-1'
             for rating in result['Ratings']:
@@ -145,7 +158,7 @@ def update_sched(request):
 
         showtimes = request.POST.get('showtimes').split(',')
         id = Showings.objects.all().count()
-        
+
         ''' make a showing database entry then save it '''
         showtime = Showings(date=request.POST.get('showdate'), time=request.POST.get('showtimes'), attendance=-1, showing_id=id, movie=movie)
         showtime.save()

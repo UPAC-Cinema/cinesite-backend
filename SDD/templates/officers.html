@@ -21,7 +21,9 @@
             </header>
             {% if messages %}
                 {% for message in messages %}
-                <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                    {% if 'sched' in message.tags %}
+                    <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
             <form action="{% url 'backend:update_sched' %}" method='post'>
@@ -67,6 +69,13 @@
             </header>
             <form action="{% url 'backend:bylaws' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'bylaws' in message.tags %}
+                    <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
                 <div class = "form-group row margin_form" style="margin-top:2%;">
                     <label for="bylaws" class = "col-sm-3 col-form-label">Bylaws</label>
                     <div class = "col-sm-4">
@@ -88,6 +97,13 @@
             </header>
             <form action="{% url 'backend:policies' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'policies' in message.tags %}
+                    <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
                 <div class = "form-group row margin_form" style="margin-top:2%;">
                     <label for="bylaws" class = "col-sm-3 col-form-label">Policies</label>
                     <div class = "col-sm-4">
@@ -109,6 +125,13 @@
             </header>
             <form action="{% url 'backend:faqs' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'faqs' in message.tags %}
+                    <div class="row" style="margin-left:3%; padding-top:1%; color:red">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
                 <div class = "form-group row margin_form" style="margin-top:2%;">
                     <label for="bylaws" class = "col-sm-3 col-form-label">FAQs</label>
                     <div class = "col-sm-4">
