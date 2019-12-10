@@ -114,10 +114,10 @@ def sponsor_results(request):
             'fourthChoice': request.POST.get('fourthChoice')
 
         }
-        '''
-            Special checking for form elements that involve input buttons rather
-            than input text
-        '''
+            '''
+                Special checking for form elements that involve input buttons rather
+                than input text
+            '''
         if (request.POST.get('unionYes') != None):
             passed_dict['union'] = 'union funded'
         if (request.POST.get('unionNo') != None):
