@@ -97,10 +97,10 @@ def sponsor_results(request):
         messages.info(request,
             'You did not fill in all required sections (marked by *)')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    '''
-        If all fields filled out correctly, then make a dictionary of data then
-        pass it to sendemail_sponsor to send an email to the club.
-    '''
+        '''
+            If all fields filled out correctly, then make a dictionary of data then
+            pass it to sendemail_sponsor to send an email to the club.
+        '''
     else:
         passed_dict = {
             'orgName': request.POST.get('orgName'),
@@ -114,10 +114,10 @@ def sponsor_results(request):
             'fourthChoice': request.POST.get('fourthChoice')
 
         }
-            '''
-                Special checking for form elements that involve input buttons rather
-                than input text
-            '''
+        '''
+            Special checking for form elements that involve input buttons rather
+            than input text
+        '''
         if (request.POST.get('unionYes') != None):
             passed_dict['union'] = 'union funded'
         if (request.POST.get('unionNo') != None):
