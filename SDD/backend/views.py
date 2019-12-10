@@ -7,7 +7,7 @@ from schedule.models import Movie
 import omdb
 import json
 import sys
-
+import os
 from os.path import expanduser, join
 from os import makedirs
 '''
